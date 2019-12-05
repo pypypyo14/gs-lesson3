@@ -34,20 +34,18 @@
                 </div>
             </div>
             <div class="movie">
-                <div class="movie-show">
-                    <iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/tAA_yWX8ycQ?controls=0&amp;start=90&amp;autoplay=1"
-                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
+                <div id="movie-player">
+                    <!-- youtubeのAPI経由で動画を埋め込む -->
                 </div>
                 <div class="movie-comment">
-                    <!-- 動画にかぶせてコメントが流れる -->
+                    <!-- 動画にかぶせてコメントを流す -->
                 </div>
             </div>
         </main>
         <footer>
         </footer>
     </div>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="js/main.js"></script>
 </body>

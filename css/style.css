@@ -48,7 +48,7 @@ body {
     white-space:nowrap;
     padding-left: 100%;
     line-height : 1em;
-    animation : marquee 8s linear infinite;
+    animation : marquee 8s linear 1;
 }
 
 @keyframes marquee {
