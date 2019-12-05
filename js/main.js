@@ -22,7 +22,7 @@ function onYouTubeIframeAPIReady() {
 
 // PlayerがReady状態になったらコメント表示用の関数を定期実行
 function onPlayerReady() {
-    setInterval(displayComment, 1000);
+    setInterval(displayLocalStorageComment, 1000);
 }
 
 // youtube動画の再生時間(今動画の何秒目か)を取得
@@ -45,8 +45,8 @@ function uniqueId() {
     return uid
 }
 
-// コメント表示用関数
-function displayComment() {
+// ローカルストレージ内のコメントを参照し、動画再生のタイミングと合わせて表示する関数
+function displayLocalStorageComment() {
     // ローカルストレージからコメントの一覧を取得（空の場合は即終了）
     let storedComments = JSON.parse(localStorage.getItem('comments'));
     if (storedComments === null) {
@@ -68,7 +68,7 @@ function displayComment() {
     });
 }
 
-// コメントの表示
+// コメントを画面に表示
 function postComment(comment) {
     // コメントのcssのtopパラメータをランダムに設定(0~90%)
     let top = generateRandomNum(90);
@@ -76,7 +76,6 @@ function postComment(comment) {
     $('.movie-comment').append(`<p class="marquee" id="${comment['id']}">${comment['text']}</p>`);
     $(`#${comment['id']}`).css("top", `${top}%`).css("color", `${comment['color']}`);
 }
-
 
 //コメントの投稿
 $('#comment-button').on('click', function () {
