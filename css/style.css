@@ -69,7 +69,7 @@ input[type="text"]{
 }
 
 
-button{
+#comment-button{
     background-color: #bc64a4;
     width: 25%;
     border: none;
@@ -81,10 +81,33 @@ button{
     outline: 0;
 }
 
-button:hover{
+#comment-button:hover{
     background-color:#5c9291;
 }
 
-button:active{
+#comment-button:active{
     background-color:#2c4f54;
+}
+
+#commentdisable-button{
+    margin: 20px;
+    background-color: white;
+    width: 30%;
+    border: 1px solid #bc64a4;
+    color: #bc64a4;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    outline: 0;
+}
+
+#commentdisable-button:hover{
+    border: 1px solid #5c9291;
+    color: #5c9291;
+}
+
+#commentdisable-button:active{
+    background-color:#2c4f54;
+    color: white;
 }

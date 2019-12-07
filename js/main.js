@@ -105,3 +105,19 @@ $('#comment-button').on('click', function () {
         postComment(newComment);
     };
 });
+
+//コメント表示非表示
+$('#commentdisable-button').on('click', function () {
+    // .on がついている場合(すでに非表示状態)
+    if ($(this).hasClass('on')) {
+        $(this).text('コメントを非表示');
+        $(this).removeClass('on');
+        $('.movie-comment').css('visibility', '');
+    } else {
+        // 現在コメント表示されている
+        $(this).text('コメントを表示');
+        $(this).addClass('on');
+        // movie-commentにcssをつける
+        $('.movie-comment').css('visibility', 'hidden');
+    };
+});
