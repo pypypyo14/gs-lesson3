@@ -23,7 +23,7 @@ function onYouTubeIframeAPIReady() {
 // PlayerがReady状態になったらコメント表示用の関数を定期実行
 function onPlayerReady() {
     setInterval(displayLocalStorageComment, 1000);
-}
+};
 
 // youtube動画の再生時間(今動画の何秒目か)を取得
 function getYoutubeTime() {
@@ -35,7 +35,7 @@ function getYoutubeTime() {
 function generateRandomNum(num) {
     let randomNum = Math.floor(Math.random() * num);
     return randomNum;
-}
+};
 
 // 16桁のユニークなIDを生成
 function uniqueId() {
@@ -43,7 +43,7 @@ function uniqueId() {
     for (var i = 0; i < 16; i++)
         uid += generateRandomNum(16).toString(16).toLowerCase();
     return uid
-}
+};
 
 // ローカルストレージ内のコメントを参照し、動画再生のタイミングと合わせて表示する関数
 function displayLocalStorageComment() {
@@ -66,7 +66,7 @@ function displayLocalStorageComment() {
             postComment(comment);
         };
     });
-}
+};
 
 // コメントを画面に表示
 function postComment(comment) {
@@ -75,7 +75,7 @@ function postComment(comment) {
     // コメントをHTML上に表示し、CSSをつける
     $('.movie-comment').append(`<p class="marquee" id="${comment['id']}">${comment['text']}</p>`);
     $(`#${comment['id']}`).css("top", `${top}%`).css("color", `${comment['color']}`);
-}
+};
 
 //コメントの投稿
 $('#comment-button').on('click', function () {
@@ -108,16 +108,17 @@ $('#comment-button').on('click', function () {
 
 //コメント表示非表示
 $('#commentdisable-button').on('click', function () {
-    // .on がついている場合(すでに非表示状態)
+    // .on がついている場合(非表示状態->表示状態へ)
     if ($(this).hasClass('on')) {
-        $(this).text('コメントを非表示');
         $(this).removeClass('on');
+        $(this).text('コメントを非表示');
+        // movie-commentを非表示にするcssをつける
         $('.movie-comment').css('visibility', '');
     } else {
-        // 現在コメント表示されている
-        $(this).text('コメントを表示');
+        // 現在.onがついていない(表示状態->非表示状態へ)
         $(this).addClass('on');
-        // movie-commentにcssをつける
+        $(this).text('コメントを表示');
+        // movie-commentを非表示にするcssをつける
         $('.movie-comment').css('visibility', 'hidden');
     };
 });
