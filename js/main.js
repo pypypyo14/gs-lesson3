@@ -20,32 +20,38 @@ function onYouTubeIframeAPIReady() {
     );
 };
 
-// PlayerがReady状態になったらコメント表示用の関数を定期実行
-function onPlayerReady() {
-    setInterval(displayLocalStorageComment, 1000);
-};
+/**
+ * PlayerがReady状態になったらコメント表示用の関数を定期実行
+ */
+const onPlayerReady = () => setInterval(displayLocalStorageComment, 1000);
 
-// youtube動画の再生時間(今動画の何秒目か)を取得
-function getYoutubeTime() {
-    var currentTime = player.getCurrentTime();
-    return currentTime
-};
+/**
+ * youtube動画の再生時間(今動画の何秒目か)を取得
+ */
+const getYoutubeTime = () => player.getCurrentTime();
 
-// ランダムな番号を生成
-function generateRandomNum(num) {
-    let randomNum = Math.floor(Math.random() * num);
-    return randomNum;
-};
+/**
+ * ランダムな番号を生成
+ * @param {number} num 番号の最大値 - 1
+ * @return {number} ランダムな番号
+ */
+const generateRandomNum = (num) => Math.floor(Math.random() * num + 1);
 
-// 16桁のユニークなIDを生成
+/**
+ * 16桁のユニークなIDを生成
+ */
 function uniqueId() {
-    var uid = '';
-    for (var i = 0; i < 16; i++)
-        uid += generateRandomNum(16).toString(16).toLowerCase();
+    const DIGITS = 16;
+    let uid = '';
+    for (var i = 0; i < DIGITS; i++)
+        uid += generateRandomNum(DIGITS).toString(16).toLowerCase();
     return uid
 };
 
-// ローカルストレージ内のコメントを参照し、動画再生のタイミングと合わせて表示する関数
+
+/**
+ * ローカルストレージ内のコメントを参照し、動画再生のタイミングと合わせて表示する関数
+ */
 function displayLocalStorageComment() {
     // ローカルストレージからコメントの一覧を取得（空の場合は即終了）
     let storedComments = JSON.parse(localStorage.getItem('comments'));
@@ -54,7 +60,7 @@ function displayLocalStorageComment() {
     };
 
     // コメントごとにループ
-    storedComments.forEach(function (comment, index) {
+    storedComments.forEach(function (comment) {
         //すでに流したコメントは処理しない
         if ($(`#${comment['id']}`).length) {
             return;
@@ -68,7 +74,10 @@ function displayLocalStorageComment() {
     });
 };
 
-// コメントを画面に表示
+/**
+ * コメントを画面に表示
+ * @param {*} comment 投稿コメント
+ */
 function postComment(comment) {
     // コメントのcssのtopパラメータをランダムに設定(0~90%)
     let top = generateRandomNum(90);
@@ -112,13 +121,11 @@ $('#commentdisable-button').on('click', function () {
     if ($(this).hasClass('on')) {
         $(this).removeClass('on');
         $(this).text('コメントを非表示');
-        // movie-commentを非表示にするcssをつける
         $('.movie-comment').css('visibility', '');
     } else {
         // 現在.onがついていない(表示状態->非表示状態へ)
         $(this).addClass('on');
         $(this).text('コメントを表示');
-        // movie-commentを非表示にするcssをつける
         $('.movie-comment').css('visibility', 'hidden');
     };
 });
